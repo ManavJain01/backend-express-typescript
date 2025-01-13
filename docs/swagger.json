@@ -1,0 +1,251 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Express Project",
+    "description": "Basic Structure For Express Project",
+    "contact": {
+      "name": "API Support",
+      "email": "nit474011gwl@gmail.com"
+    }
+  },
+  "host": "localhost:5000",
+  "basePath": "/api/",
+  "tags": [
+    {
+      "name": "Express Project",
+      "description": "BackEnd APIs"
+    },
+    {
+      "name": "Users",
+      "description": "User Management APIs"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "securityDefinitions": {},
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/users/": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/users/{id}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "patch": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "User": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "example": "string"
+        },
+        "name": {
+          "type": "string",
+          "example": "string"
+        },
+        "email": {
+          "type": "string",
+          "example": "string"
+        },
+        "age": {
+          "type": "string",
+          "example": "number"
+        }
+      }
+    },
+    "UserCreation": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "string"
+        },
+        "email": {
+          "type": "string",
+          "example": "string"
+        },
+        "password": {
+          "type": "string",
+          "example": "string"
+        }
+      }
+    },
+    "UserUpdate": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "string"
+        },
+        "email": {
+          "type": "string",
+          "example": "string"
+        }
+      }
+    },
+    "todoResponse": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "number",
+          "example": 200
+        },
+        "message": {
+          "type": "string",
+          "example": "Success"
+        }
+      }
+    },
+    "errorResponse.400": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "number",
+          "example": 400
+        },
+        "message": {
+          "type": "string",
+          "example": "The request was malformed or invalid. Please check the request parameters."
+        }
+      }
+    },
+    "errorResponse.401": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "number",
+          "example": 401
+        },
+        "message": {
+          "type": "string",
+          "example": "Authentication failed or user lacks proper authorization."
+        }
+      }
+    },
+    "errorResponse.403": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "number",
+          "example": 403
+        },
+        "message": {
+          "type": "string",
+          "example": "You do not have permission to access this resource."
+        }
+      }
+    },
+    "errorResponse.404": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "number",
+          "example": 404
+        },
+        "message": {
+          "type": "string",
+          "example": "The requested resource could not be found on the server."
+        }
+      }
+    },
+    "errorResponse.500": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "number",
+          "example": 500
+        },
+        "message": {
+          "type": "string",
+          "example": "An unexpected error occurred on the server. Please try again later."
+        }
+      }
+    }
+  }
+}
