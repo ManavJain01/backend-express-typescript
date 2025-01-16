@@ -1,5 +1,4 @@
-
-import mongoose from "mongoose";
+import mongoose, { model } from "mongoose";
 import { type IUser } from "./user.dto";
 import bcrypt from 'bcrypt';
 
@@ -13,16 +12,20 @@ const hashPassword = async (password: string) => {
 const UserSchema = new Schema<IUser>({
         name: { type: String, required: true },
         email: { type: String, required: true },
-        active: { type: Boolean, required: false, default: true },
         role: { type: String, required: true, enum: ["USER", "ADMIN"], default: "USER" },
         password: { type: String, required: true },
+        refreshToken: { type: String },
 }, { timestamps: true });
 
 UserSchema.pre("save", async function (next) {
-        if (this.password) {
-                this.password = await hashPassword(this.password);
-        }
+        // if (this.password) {
+        //         this.password = await hashPassword(this.password);
+        // }
         next();
 });
 
-export default mongoose.model<IUser>("user", UserSchema);
+
+// Exporting models
+const User = model<IUser>("User", UserSchema);
+
+export { User };

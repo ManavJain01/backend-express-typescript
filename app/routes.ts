@@ -1,13 +1,13 @@
 import express from "express";
-import userRoutes from "./user/user.route";
 
-import swaggerUi from "swagger-ui-express";
-import swaggerJsonFile from "../docs/swagger.json"
+// Routes
+import userRoutes from "./modules/user/user.route";
+import commonRoutes from "./modules/common/common.route";
 
 // routes
 const router = express.Router();
 
 router.use("/users", userRoutes);
-router.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerJsonFile));
+router.use("/", commonRoutes);
 
 export default router;
