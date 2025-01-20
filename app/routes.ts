@@ -1,13 +1,9 @@
-import express from "express";
-
-// Routes
-import userRoutes from "./modules/user/user.route";
-import commonRoutes from "./modules/common/common.route";
+import { express, apiLimiter, userRoutes, commonRoutes } from "./common/helper/imports.helper";
 
 // routes
 const router = express.Router();
 
-router.use("/users", userRoutes);
-router.use("/", commonRoutes);
+router.use("/users", apiLimiter, userRoutes);
+router.use("/", apiLimiter, commonRoutes);
 
 export default router;
