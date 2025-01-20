@@ -1,10 +1,12 @@
-import { express, swaggerUi, swaggerJsonFile, apiLimiter, userRoutes, authRoutes, roleAuthMiddleware } from "./common/helper/imports.helper";
+import { Router, swaggerUi, swaggerJsonFile, roleAuthMiddleware } from "./common/helper/imports.helper";
+import authRoutes from "./Auth/auth.route"
+import userRoutes from "./user/user.route"
 
 // routes
-const router = express.Router();
+const router = Router();
 
 router.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerJsonFile));
-router.use("/users", apiLimiter, roleAuthMiddleware(["USER", "ADMIN"]), userRoutes);
+router.use("/users", roleAuthMiddleware(["USER", "ADMIN"]), userRoutes);
 router.use("/", authRoutes);
 
 export default router;

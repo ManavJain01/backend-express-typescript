@@ -1,9 +1,9 @@
-import { type BaseSchema } from "../../common/dto/base.dto";
+import { BaseSchema } from "../common/helper/imports.helper";
 
 export interface IUser extends BaseSchema {
         name: string;
         email: string;
         role: "USER" | "ADMIN";
         password: string,
-        refreshToken: string
+        refreshToken: string | undefined
 }

@@ -1,12 +1,4 @@
-import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
-import passport from "passport";
-import { Strategy, ExtractJwt } from "passport-jwt";
-import { Strategy as LocalStrategy } from "passport-local";
-import createError from "http-errors";
-import * as userService from "../../modules/user/user.service";
-import { type Request } from "express";
-import { type IUser } from "../../modules/user/user.dto";
+import { jwt, bcrypt, passport, createError, IUser, Request, userService, Strategy, ExtractJwt, LocalStrategy } from "../helper/imports.helper";
 
 const isValidPassword = async function (value: string, password: string) {
   const compare = await bcrypt.compare(value, password);
@@ -17,7 +9,7 @@ export const initPassport = (): void => {
   passport.use(
     new Strategy(
       {
-        secretOrKey: process.env.JWT_SECRET,
+        secretOrKey: process.env.ACCESS_TOKEN as string,
         jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       },
       async (token: { user: Request["user"] }, done) => {

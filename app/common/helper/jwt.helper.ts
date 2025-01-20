@@ -1,7 +1,4 @@
-import { type IUser } from "../../modules/user/user.dto";
-import jwt from "jsonwebtoken";
-import createHttpError from "http-errors";
-
+import { jwt, IUser, createHttpError } from "./imports.helper";
 
 const getEnvTokens = () => {
     // const SECRET_KEY = process.env.JWT_SECRET ?? "";

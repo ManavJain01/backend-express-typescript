@@ -1,10 +1,4 @@
-import { express, type Express, type Request, type Response, bodyParser, morgan, http } from "./app/common/helper/imports.helper"
-
-import { initDB } from "./app/common/services/database.service";
-import { initPassport } from "./app/common/services/passport-jwt.service";
-import { loadConfig } from "./app/common/helper/config.hepler";
-import { type IUser } from "./app/modules/user/user.dto";
-import errorHandler from "./app/common/middleware/error-handler.middleware";
+import { express, type Express, type Request, type Response, cookieParser, bodyParser, morgan, http, errorHandler, apiLimiter, loadConfig, initDB, initPassport, IUser } from "./app/common/helper/imports.helper"
 import routes from "./app/routes";
 
 loadConfig();
@@ -26,6 +20,7 @@ const app: Express = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.json());
+app.use(cookieParser());
 app.use(morgan("dev"));
 
 const initApp = async (): Promise<void> => {
@@ -36,18 +31,16 @@ const initApp = async (): Promise<void> => {
   initPassport();
 
   // set base path to /api
-  app.use("/api", routes);
+  app.use("/api", apiLimiter, routes);
 
-  app.get("/", (req: Request, res: Response) => {
+  app.get("/", apiLimiter, (req: Request, res: Response) => {
     res.send({ status: "ok" });
   });
-
-
 
   // error handler
   app.use(errorHandler);
   http.createServer(app).listen(port, () => {
-    console.log("Server is runnuing on port", port);
+    console.log("Server is running on port", port);
   });
 };
 

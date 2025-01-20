@@ -1,6 +1,4 @@
-import { type IUser } from "./user.dto";
-import { User } from "./user.schema";
-import { generateAccessTokenAndRefreshToken } from "../../common/helper/jwt.helper";
+import { IUser, User, generateAccessTokenAndRefreshToken } from "../common/helper/imports.helper"
 
 export const createUser = async (data: IUser) => {
     const result = await User.create({ ...data });

@@ -1,7 +1,4 @@
-import nodemailer from "nodemailer";
-import type Mail from "nodemailer/lib/mailer";
-import createHttpError from "http-errors";
-import { loadConfig } from "../helper/config.hepler";
+import { createHttpError, nodemailer, Mail, loadConfig } from "../helper/imports.helper"
 
 loadConfig();
 
@@ -20,11 +17,3 @@ export const sendEmail = async (mailOptions: Mail.Options): Promise<any> => {
     createHttpError(500, { message: error.message });
   }
 };
-
-export const resetPasswordEmailTemplate = (token = ""): string => `
-<html>
-  <body>
-    <h3>Welcome to app</h3>
-    <p>Click <a href="${process.env.FE_BASE_URL}/reset-password?token=${token}">here</a> to reset your password</p>
-  </body>
-</html>`;

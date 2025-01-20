@@ -1,5 +1,4 @@
-
-import { body } from 'express-validator';
+import { body } from "../common/helper/imports.helper"
 
 export const createUser = [
     body('name').notEmpty().withMessage('name is required').isString().withMessage('name must be a string'),
