@@ -1,4 +1,6 @@
-import { dotenv, path, process } from "./imports.helper";
+import dotenv from "dotenv";
+import process from "process";
+import path from "path";
 
 export const loadConfig = () => {
   const env = process.env.NODE_ENV ?? "development";

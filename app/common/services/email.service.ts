@@ -1,4 +1,7 @@
-import { createHttpError, nodemailer, Mail, loadConfig } from "../helper/imports.helper"
+import nodemailer from "nodemailer";
+import type Mail from "nodemailer/lib/mailer";
+import createHttpError from "http-errors";
+import { loadConfig } from "../helper/config.hepler";
 
 loadConfig();
 

@@ -1,4 +1,4 @@
-import { mongoose } from "../helper/imports.helper";
+import mongoose from "mongoose";
 
 export const initDB = async (): Promise<boolean> => {
   return await new Promise((resolve, reject) => {

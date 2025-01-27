@@ -1,4 +1,12 @@
-import { jwt, bcrypt, passport, createError, IUser, Request, userService, Strategy, ExtractJwt, LocalStrategy } from "../helper/imports.helper";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+import passport from "passport";
+import { Strategy, ExtractJwt } from "passport-jwt";
+import { Strategy as LocalStrategy } from "passport-local";
+import createError from "http-errors";
+import * as userService from "../../user/user.service";
+import { type Request } from "express";
+import { type IUser } from "../../user/user.dto";
 
 const isValidPassword = async function (value: string, password: string) {
   const compare = await bcrypt.compare(value, password);
@@ -9,7 +17,7 @@ export const initPassport = (): void => {
   passport.use(
     new Strategy(
       {
-        secretOrKey: process.env.ACCESS_TOKEN as string,
+        secretOrKey: process.env.ACCESS_TOKEN,
         jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       },
       async (token: { user: Request["user"] }, done) => {
@@ -37,6 +45,11 @@ export const initPassport = (): void => {
             done(createError(401, "User not found!"), false);
             return;
           }
+
+          // if (user.blocked) {
+          //   done(createError(401, "User is blocked, Contact to admin"), false);
+          //   return;
+          // }
 
           const validate = await isValidPassword(password, user.password);
           if (!validate) {

@@ -1,16 +1,16 @@
-import { IUser, bcrypt, mongoose, model, authService } from "../common/helper/imports.helper";
+import mongoose, { model } from "mongoose";
+import { type IUser } from "./user.dto";
+import * as authService from "../auth/auth.service"
+import { userEnum } from "./user.dto";
 
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema<IUser>({
         name: { type: String, required: true },
         email: { type: String, required: true },
-        role: { type: String, required: true, enum: ["USER", "ADMIN"], default: "USER" },
+        role: { type: String, required: true, enum: [...userEnum], default: "USER" },
         password: { type: String, required: true },
-        refreshToken: {
-                type: String,
-                default: null, // Ensure it can be null if it's removed
-        },
+        refreshToken: { type: String },
 }, { timestamps: true });
 
 UserSchema.pre("save", async function (next) {
